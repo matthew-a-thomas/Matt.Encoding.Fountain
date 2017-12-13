@@ -1,5 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Matt.Encoding.Fountain</Title>
+    <Description>Tools for fountain codes.</Description>
+    <Copyright>2017 Matthew Thomas</Copyright>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company />
+    <Authors>Matthew Thomas</Authors>
+    <PackageLicenseUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</RepositoryUrl>
   </PropertyGroup>
 </Project>
