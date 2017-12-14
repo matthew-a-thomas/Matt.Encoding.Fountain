@@ -4,8 +4,8 @@
     <Title>Matt.Encoding.Fountain</Title>
     <Description>Tools for fountain codes.</Description>
     <Copyright>2017 Matthew Thomas</Copyright>
-    <VersionPrefix>1.0.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionSuffix/>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
     <Authors>Matthew Thomas</Authors>
@@ -13,4 +13,10 @@
     <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</PackageProjectUrl>
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Matt.Bits" Version="1.0.0" />
+    <PackageReference Include="Matt.Math.Linear.Solving" Version="1.0.3" />
+    <PackageReference Include="Matt.Random" Version="1.0.0" />
+    <PackageReference Include="Nito.AsyncEx" Version="4.0.1" />
+  </ItemGroup>
 </Project>
