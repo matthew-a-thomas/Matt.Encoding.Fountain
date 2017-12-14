@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Matt.Encoding.Fountain;
-    using Matt.Random;
+    using Matt.Random.Adapters;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
