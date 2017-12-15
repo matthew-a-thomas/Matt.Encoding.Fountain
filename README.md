@@ -102,7 +102,7 @@ All that's happening behind the scenes is that random subsets of the original da
 
 If you use a slice size of 1/_k_ (so that there are _k_ slices), you'll _probably_ be able to decode your original data after collecting _n_ slices. You have to have at least _k_ slices; after that your chances are governed by [the following equation](http://math.stackexchange.com/a/172112/284627):
 
-![Probability of decoding n slices](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/Probability%20of%20decoding%20n%20slices.gif "Probability of decoding n slices")
+![Probability of decoding n slices](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/img/Probability%20of%20decoding%20n%20slices.gif "Probability of decoding n slices")
 
 Basically, by having _n_=_k_ slices you're guaranteed at least a 29% chance success (better if _k_ is small). After that the above equations says your chances will improve quickly. Here's a table showing the asymptotic limit of the above equation for various _n_ above _k_:
 
@@ -128,12 +128,12 @@ Basically, by having _n_=_k_ slices you're guaranteed at least a 29% chance succ
 
 Note that the number of nines after the decimal place follows this equation:
 
-![Number of nines after decimal place](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/readme-updates/Number%20of%20nines%20after%20decimal%20place.gif "Number of nines after decimal place")
+![Number of nines after decimal place](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/img/Number%20of%20nines%20after%20decimal%20place.gif "Number of nines after decimal place")
 
 ### There _is_ a limit to how many slices there can be
 
 If you understand that each slice is just a random linear combination of subsections of your data, then you'll recognize that there can be this many distinct slices (where 1/_k_ is the size of each slice):
 
-![Number of distinct slices](https://github.com/matthew-a-thomas/Matt.Encoding.Fountain/blob/readme-updates/Number%20of%20distinct%20slices.gif?raw=true "Number of distinct slices")
+![Number of distinct slices](https://github.com/matthew-a-thomas/Matt.Encoding.Fountain/blob/master/img/Number%20of%20distinct%20slices.gif "Number of distinct slices")
 
 But if you choose _k_ = 190 then you'll be able to generate more distinct slices than there are atoms in the Sun.
