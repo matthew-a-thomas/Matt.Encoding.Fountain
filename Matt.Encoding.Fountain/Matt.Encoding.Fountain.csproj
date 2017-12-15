@@ -5,7 +5,7 @@
     <Title>Matt.Encoding.Fountain</Title>
     <Description>Tools for fountain codes.</Description>
     <Copyright>2017 Matthew Thomas</Copyright>
-    <VersionPrefix>1.1.3</VersionPrefix>
+    <VersionPrefix>1.1.4</VersionPrefix>
     <VersionSuffix />
     <Company />
     <Authors>Matthew Thomas</Authors>
@@ -17,7 +17,7 @@
     <PackageReference Include="Matt.Bits" Version="1.1.1" />
     <PackageReference Include="Matt.Lists" Version="1.2.1" />
     <PackageReference Include="Matt.Math.Linear.Solving" Version="1.0.6" />
-    <PackageReference Include="Matt.Random" Version="2.2.0" />
+    <PackageReference Include="Matt.Random" Version="2.2.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />
     <PackageReference Include="Nito.AsyncEx" Version="4.0.1" />
   </ItemGroup>
