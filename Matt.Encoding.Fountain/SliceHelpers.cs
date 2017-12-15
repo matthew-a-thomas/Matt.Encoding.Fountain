@@ -7,6 +7,9 @@
     using Lists;
     using Random;
 
+    /// <summary>
+    /// Static helper methods for <see cref="Slice"/>s.
+    /// </summary>
     public static class SliceHelpers
     {
         // TODO: This function creates an expensive enumerable--can we use async? or Reactive?

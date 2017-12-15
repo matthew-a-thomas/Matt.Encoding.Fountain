@@ -5,6 +5,9 @@
     using System.Linq;
     using Bits;
 
+    /// <summary>
+    /// Extension methods dealing with <see cref="Slice"/>s.
+    /// </summary>
     public static class SliceExtensions
     {
         /// <summary>
