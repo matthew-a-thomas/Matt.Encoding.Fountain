@@ -92,6 +92,47 @@ if (solution == null)
 await DoSomethingWithSolutionAsync(solution);
 ```
 
+## Types
+
+### `Slice`
+
+A `Slice` is just an immutable data container that also describes from which subsections of original data it came.
+
+#### `Slice.Coefficients : IReadOnlyList<bool>`
+
+This read-only list of bits tells which subsections of the original data went into making this `Slice`.
+
+#### `Slice.Data : IReadOnlyList<byte>`
+
+This read-only list of bytes holds the combined subsections of original data.
+
+### `SliceSolver`
+
+Combines `Slice`s together to recover the original data.
+
+#### `SliceSolver.RememberAsync(Slice slice) : Task`
+
+Records the given `Slice` so that it can be used in the solution.
+
+#### `SliceSolver.TrySolveAsync() : Task<byte[]>`
+
+Asynchronously tries to solve for the original data. If `null` is returned then more `Slice`s need to be remembered.
+
+### `SliceHelpers`
+
+Static class with helper functions.
+
+### `SliceHelpers.CreateGenerator(byte[] data, int sliceSize, Func<IRandom> rngFactoryDelegate, bool isSystematic = true) : IEnumerable<Slice>`
+
+Parameters:
+
+ * `data : byte[]` is the original data.
+ * `sliceSize : int` is the size of each slice. This is the "1/_k_" that you'll see mentioned elsewhere in this readme.
+ * `rngFactoryDelegate : Func<IRandom>` a delegate which returns a new instance of `IRandom` each time it's invoked. `IRandom` comes from [`Matt.Random`](https://www.nuget.org/packages/Matt.Random/)--there is an adapter in that NuGet package that lets you use a regular `Random` instance.
+ * `isSystematic : bool` determines if the first _k_ `Slice`s that come out are the first _k_ subsections of the original data in order.
+
+Returns an infinitely-long enumerable of `Slice`s. To generate another slice, just pull another element out of the returned enumerable.
+
 ## Technicalities
 
 ### This isn't magic
