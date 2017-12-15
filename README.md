@@ -12,6 +12,7 @@ C# implementation of [Fountain Codes](https://en.wikipedia.org/wiki/Fountain_cod
 A [fountain code](https://en.wikipedia.org/wiki/Fountain_code) is a rateless forward error correction code. That means:
  * Data is split up into slices.
  * Only a subset of those slices are needed to get the data back.
+ * There is no practical limit to how many distinct slices there can be.
 
 ## Practical applications
 
@@ -128,3 +129,8 @@ Basically, by having _n_=_k_ slices you're guaranteed at least a 29% chance succ
 Note that the number of nines after the decimal place follows this equation:
 
 ![Number of nines after decimal place](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/readme-updates/Number%20of%20nines%20after%20decimal%20place.gif "Number of nines after decimal place")
+
+### There is a limit to how many slices there can be
+
+If you understand that each slice is just a random linear combination of subsections of your data, then you'll recognize that there can be this many distinct slices (where 1/_k_ is the size of each slice):
+
