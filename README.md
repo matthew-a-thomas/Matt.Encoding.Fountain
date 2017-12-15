@@ -99,11 +99,11 @@ All that's happening behind the scenes is that random subsets of the original da
 
 ### Decoding is not deterministic
 
-If you use a slice size of 1/_k_ (so that there are _k_ slices), you'll _probably_ be able to decode your original data after collecting _n_ slices. You have to have at least _k_ slices (this isn't magic); after that your chances are governed by this equation:
+If you use a slice size of 1/_k_ (so that there are _k_ slices), you'll _probably_ be able to decode your original data after collecting _n_ slices. You have to have at least _k_ slices; after that your chances are governed by [the following equation](http://math.stackexchange.com/a/172112/284627):
 
 ![Probability of decoding n slices](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/Probability%20of%20decoding%20n%20slices.gif "Probability of decoding n slices")
 
-Basically by having _n_=_k_ slices you're guaranteed at least a 29% chance success (better if _k_ is small). After that the above equations says your chances will improve quickly. Here's a table showing the asymptotic limit of the above equation for various _n_ above _k_:
+Basically, by having _n_=_k_ slices you're guaranteed at least a 29% chance success (better if _k_ is small). After that the above equations says your chances will improve quickly. Here's a table showing the asymptotic limit of the above equation for various _n_ above _k_:
 
 | _n_-_k_ | Your probability is at least: |
 |---------|-------------------------------|
@@ -119,3 +119,6 @@ Basically by having _n_=_k_ slices you're guaranteed at least a 29% chance succe
 | 9 | 0.9980481462110119 |
 | 10 | 0.9990237553470930 |
 | 15 | 0.9999694827323145 |
+
+Note that the number of nines after the decimal place follows this equation:
+
