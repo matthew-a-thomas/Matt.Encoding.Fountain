@@ -101,4 +101,4 @@ All that's happening behind the scenes is that random subsets of the original da
 
 The rate of success of decoding is probabilistic. If you use a slice size of 1/_k_ (so that there are _k_ slices), you'll _probably_ be able to decode your original data after collecting _n_ slices according to this equation:
 
-<img align="center" src="https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/Probability%20of%20decoding%20n%20slices.gif" alt="Probability of decoding n slices">
+![Probability of decoding n slices](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/Probability%20of%20decoding%20n%20slices.gif "Probability of decoding n slices")
