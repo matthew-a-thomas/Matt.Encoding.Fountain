@@ -99,6 +99,23 @@ All that's happening behind the scenes is that random subsets of the original da
 
 ### Decoding is not deterministic
 
-The rate of success of decoding is probabilistic. If you use a slice size of 1/_k_ (so that there are _k_ slices), you'll _probably_ be able to decode your original data after collecting _n_ slices according to this equation:
+If you use a slice size of 1/_k_ (so that there are _k_ slices), you'll _probably_ be able to decode your original data after collecting _n_ slices. You have to have at least _k_ slices (this isn't magic); after that your chances are governed by this equation:
 
 ![Probability of decoding n slices](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/master/Probability%20of%20decoding%20n%20slices.gif "Probability of decoding n slices")
+
+Basically by having _n_=_k_ slices you're guaranteed at least a 29% chance success (better if _k_ is small). After that the above equations says your chances will improve quickly. Here's a table showing the asymptotic limit of the above equation for various _n_ above _k_:
+
+| _n_-_k_ | Your probability is at least: |
+|---------|-------------------------------|
+| 0 | 0.2887880950866024 |
+| 1 | 0.5775761901732048 |
+| 2 | 0.7701015868976065 |
+| 3 | 0.8801160993115502 |
+| 4 | 0.9387905059323203 |
+| 5 | 0.9690740706398145 |
+| 6 | 0.9844561987452083 |
+| 7 | 0.9922078223573753 |
+| 8 | 0.9960988334254435 |
+| 9 | 0.9980481462110119 |
+| 10 | 0.9990237553470930 |
+| 15 | 0.9999694827323145 |
