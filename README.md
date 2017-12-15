@@ -119,6 +119,12 @@ Basically, by having _n_=_k_ slices you're guaranteed at least a 29% chance succ
 | 9 | 0.9980481462110119 |
 | 10 | 0.9990237553470930 |
 | 15 | 0.9999694827323145 |
+| 20 | 0.9999990463259868 |
+| 25 | 0.9999999701976779 |
+| 50 | 0.9999999999999991 |
+| 53 | <0.9999999999999999 |
+| 54 | >0.9999999999999999 |
 
 Note that the number of nines after the decimal place follows this equation:
 
+![Number of nines after decimal place](https://raw.githubusercontent.com/matthew-a-thomas/Matt.Encoding.Fountain/readme-updates/Number%20of%20nines%20after%20decimal%20place.gif "Number of nines after decimal place")
