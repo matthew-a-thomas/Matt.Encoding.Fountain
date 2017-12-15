@@ -134,3 +134,4 @@ Note that the number of nines after the decimal place follows this equation:
 
 If you understand that each slice is just a random linear combination of subsections of your data, then you'll recognize that there can be this many distinct slices (where 1/_k_ is the size of each slice):
 
+![Number of distinct slices](https://github.com/matthew-a-thomas/Matt.Encoding.Fountain/blob/readme-updates/Number%20of%20distinct%20slices.gif?raw=true "Number of distinct slices")
