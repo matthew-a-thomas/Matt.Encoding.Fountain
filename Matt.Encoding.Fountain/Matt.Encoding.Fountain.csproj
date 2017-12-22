@@ -5,7 +5,7 @@
     <Title>Matt.Encoding.Fountain</Title>
     <Description>Tools for fountain codes.</Description>
     <Copyright>2017 Matthew Thomas</Copyright>
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <Company />
     <Authors>Matthew Thomas</Authors>
@@ -14,7 +14,8 @@
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Matt.Bits" Version="1.3.0" />
+    <PackageReference Include="Matt.Bits" Version="1.4.0" />
+    <PackageReference Include="Matt.Interfaces" Version="1.0.1" />
     <PackageReference Include="Matt.Lists" Version="2.0.0" />
     <PackageReference Include="Matt.Math.Linear.Solving" Version="2.0.0" />
     <PackageReference Include="Matt.Random" Version="2.2.1" />

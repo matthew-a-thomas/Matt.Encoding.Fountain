@@ -38,18 +38,17 @@
                     var slice = tuple.Slice;
                     
                     // Verify coefficients
-                    Assert.IsNotNull(slice.Coefficients);
                     var expectedCoefficients =
                         Enumerable.Repeat(false, index)
                         .Append(true)
                         .Concat(Enumerable.Repeat(false, data.Length - index - 1))
                         .ToList();
-                    Assert.IsTrue(slice.Coefficients.SequenceEqual(expectedCoefficients));
+                    Assert.IsTrue(slice.GetCoefficients().SequenceEqual(expectedCoefficients));
                     
                     // Verify data
-                    Assert.IsNotNull(slice.Data);
-                    Assert.AreEqual(slice.Data.Count, 1);
-                    Assert.AreEqual(slice.Data[0], data[index]);
+                    var sliceData = slice.GetData().ToList();
+                    Assert.AreEqual(sliceData.Count, 1);
+                    Assert.AreEqual(sliceData[0], data[index]);
                 }
             }
             

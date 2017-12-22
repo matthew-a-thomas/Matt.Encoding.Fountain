@@ -15,10 +15,10 @@
                 value1 = 0xFF,
                 value2 = 0x55;
             Slice
-                slice1 = new Slice(
+                slice1 = Slice.Create(
                     coefficients: new [] { true, false },
                     data: new [] { value1 }),
-                slice2 = new Slice(
+                slice2 = Slice.Create(
                     coefficients: new [] { true, true },
                     data: new [] { (byte)(value2 ^ value1) });
             var solver = new SliceSolver(1, 2);
@@ -43,7 +43,7 @@
         public async Task PutsOneByteBackTogetherAsync()
         {
             const byte value = 0xF5;
-            var slice = new Slice(
+            var slice = Slice.Create(
                 coefficients: new [] { true },
                 data: new [] { value }
             );
@@ -62,10 +62,10 @@
                 value1 = 0xFF,
                 value2 = 0x55;
             Slice
-                slice1 = new Slice(
+                slice1 = Slice.Create(
                     coefficients: new [] { true, false },
                     data: new [] { value1 }),
-                slice2 = new Slice(
+                slice2 = Slice.Create(
                     coefficients: new [] { false, true },
                     data: new [] { value2 });
             var solver = new SliceSolver(1, 2);
@@ -88,11 +88,11 @@
                 (byte)'t'
             };
             Slice
-                slice1 = new Slice(
+                slice1 = Slice.Create(
                     coefficients: new [] { true, false },
                     data: new [] { originalData[0], originalData[1] }
                 ),
-                slice2 = new Slice(
+                slice2 = Slice.Create(
                     coefficients: new [] { true, true },
                     data: new [] { (byte)(originalData[0] ^ originalData[2]), originalData[1] }
                 );

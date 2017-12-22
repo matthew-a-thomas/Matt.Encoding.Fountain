@@ -18,7 +18,7 @@
         /// <paramref name="data"/>.
         /// </summary>
         /// <param name="data">The data which will get cloned and mixed in the resulting sequence.</param>
-        /// <param name="sliceSize">The size of each individual <see cref="Slice"/>'s <see cref="Slice.Data"/>.</param>
+        /// <param name="sliceSize">The size of each individual <see cref="Slice"/>'s data.</param>
         /// <param name="rngFactoryDelegate">
         /// A function which returns an <see cref="IRandom"/>. Since <see cref="IRandom"/> is not thread-safe, then it's
         /// wise to make this function return a new instance of <see cref="IRandom"/> each time it is invoked.

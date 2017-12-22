@@ -13,13 +13,11 @@
             [TestMethod]
             public void ClonesASingleSlice()
             {
-                var slice = new Slice(coefficients: new bool[5], data: new byte[5]);
+                var slice = Slice.Create(coefficients: new bool[5], data: new byte[5]);
                 var sequence = new [] { slice };
                 var mixed = sequence.Mix();
-                Assert.IsNotNull(mixed.Coefficients);
-                Assert.IsNotNull(mixed.Data);
-                Assert.AreNotSame(mixed.Coefficients, slice.Coefficients);
-                Assert.AreNotSame(mixed.Data, slice.Data);
+                Assert.AreEqual(5, mixed.GetCoefficients().Count());
+                Assert.AreEqual(5, mixed.GetData().Count());
             }
         }
         
@@ -32,8 +30,8 @@
                 var data = new byte[5];
                 var slices = data.ToSlices(10).ToList();
                 Assert.AreEqual(slices.Count, 1);
-                Assert.AreEqual(slices[0].Coefficients.Count, slices.Count);
-                Assert.AreEqual(slices[0].Data.Count, 10);
+                Assert.AreEqual(slices.Count, slices[0].GetCoefficients().Count());
+                Assert.AreEqual(10, slices[0].GetData().Count());
             }
             
             [TestMethod]
@@ -42,8 +40,8 @@
                 var data = new byte[5];
                 var slices = data.ToSlices(5).ToList();
                 Assert.AreEqual(slices.Count, 1);
-                Assert.AreEqual(slices[0].Coefficients.Count, slices.Count);
-                Assert.AreEqual(slices[0].Data.Count, 5);
+                Assert.AreEqual(slices.Count, slices[0].GetCoefficients().Count());
+                Assert.AreEqual(5, slices[0].GetData().Count());
             }
             
             [TestMethod]
@@ -52,10 +50,10 @@
                 var data = new byte[5];
                 var slices = data.ToSlices(4).ToList();
                 Assert.AreEqual(slices.Count, 2);
-                Assert.AreEqual(slices[0].Coefficients.Count, slices.Count);
-                Assert.AreEqual(slices[0].Data.Count, 4);
-                Assert.AreEqual(slices[1].Coefficients.Count, slices.Count);
-                Assert.AreEqual(slices[1].Data.Count, 4);
+                Assert.AreEqual(slices.Count, slices[0].GetCoefficients().Count());
+                Assert.AreEqual(4, slices[0].GetData().Count());
+                Assert.AreEqual(slices.Count, slices[1].GetCoefficients().Count());
+                Assert.AreEqual(4, slices[1].GetData().Count());
             }
         }
     }

@@ -35,7 +35,7 @@
         /// <summary>
         /// The list of equation solutions that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<long[]> _solutionsList = new List<long[]>();
+        private readonly IList<Packed> _solutionsList = new List<Packed>();
         
         /// <summary>
         /// The length of the original data that was encoded into <see cref="Slice"/>s.
@@ -59,10 +59,11 @@
         /// </summary>
         public async Task RememberAsync(Slice slice)
         {
+            slice = slice.Clone();
             using (await _guard.LockAsync())
             {
-                _coefficientsList.Add(new BitArray(slice.Coefficients.ToArray()));
-                _solutionsList.Add(slice.Data.Pack().ToArray());
+                _coefficientsList.Add(new BitArray(slice.GetCoefficients().ToArray()));
+                _solutionsList.Add(slice.PackedData);
             }
         }
 
@@ -72,7 +73,7 @@
         private static void Swap(
             int from,
             int to,
-            IList<long[]> solutions)
+            IList<Packed> solutions)
         {
             if (from >= solutions.Count || to >= solutions.Count)
                 return;
@@ -116,7 +117,7 @@
                     return null;
                 return
                     _solutionsList
-                        .SelectMany(x => x.Unpack().Take(_sliceSize))
+                        .SelectMany(x => x.GetBytes().Take(_sliceSize))
                         .Take(_totalLength)
                         .ToArray();
             }
@@ -128,17 +129,13 @@
         private static void Xor(
             int from,
             int to,
-            IList<long[]> solutions)
+            IList<Packed> solutions)
         {
             if (from >= solutions.Count || to >= solutions.Count)
                 return;
-            var toArray = solutions[to];
-            var fromArray = solutions[from];
-            var length = Math.Min(
-                fromArray.Length,
-                toArray.Length);
-            for (var i = 0; i < length; ++i)
-                toArray[i] ^= fromArray[i];
+            var toPacked = solutions[to];
+            var fromPacked = solutions[from];
+            toPacked.Xor(fromPacked);
         }
     }
 }
