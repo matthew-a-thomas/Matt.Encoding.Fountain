@@ -1,12 +1,12 @@
-﻿namespace Tests
+﻿namespace Matt.Encoding.Fountain.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
-    using Matt.Encoding.Fountain;
-    using Matt.Random.Adapters;
+    using Fountain;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Random.Adapters;
 
     [TestClass]
     public class SliceHelpersClass

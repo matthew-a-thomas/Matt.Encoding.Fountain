@@ -1,6 +1,7 @@
-﻿namespace Tests
+﻿namespace Matt.Encoding.Fountain.Tests
 {
-    using Matt.Random;
+    using Random;
+
     internal sealed class NotRandom : IRandom
     {
         private readonly byte _valueToPopulateWith;

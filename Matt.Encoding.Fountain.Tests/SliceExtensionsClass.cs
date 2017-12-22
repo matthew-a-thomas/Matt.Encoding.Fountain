@@ -1,7 +1,7 @@
-﻿namespace Tests
+﻿namespace Matt.Encoding.Fountain.Tests
 {
     using System.Linq;
-    using Matt.Encoding.Fountain;
+    using Fountain;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
