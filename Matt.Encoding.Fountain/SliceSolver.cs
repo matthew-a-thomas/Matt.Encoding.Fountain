@@ -1,8 +1,11 @@
 ﻿namespace Matt.Encoding.Fountain
 {
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Bits;
     using Math.Linear.Solving;
     using Nito.AsyncEx;
 
@@ -20,36 +23,35 @@
         private readonly AsyncLock _guard = new AsyncLock();
         
         /// <summary>
-        /// The list of coefficients that is used by <see cref="_gaussianElimination"/> to solve things.
+        /// The list of coefficients that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<bool[]> _coefficientsList = new List<bool[]>();
+        private readonly IList<BitArray> _coefficientsList = new List<BitArray>();
+
+        /// <summary>
+        /// The number of bytes of data in each <see cref="Slice"/>.
+        /// </summary>
+        private readonly int _sliceSize;
         
         /// <summary>
-        /// The core solver of systems of equations.
+        /// The list of equation solutions that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly GaussianElimination _gaussianElimination;
-        
-        /// <summary>
-        /// The list of equation solutions that is used by <see cref="_gaussianElimination"/> to solve things.
-        /// </summary>
-        private readonly IList<byte[]> _solutionsList = new List<byte[]>();
+        private readonly IList<long[]> _solutionsList = new List<long[]>();
         
         /// <summary>
         /// The length of the original data that was encoded into <see cref="Slice"/>s.
         /// </summary>
         private readonly int _totalLength;
-        
+
         /// <summary>
         /// Creates a new <see cref="SliceSolver"/>, which uses <see cref="Slice"/>s to decode the original data that
         /// went into making those <see cref="Slice"/>s.
         /// </summary>
+        /// <param name="sliceSize">The number of bytes of data in each slice.</param>
         /// <param name="totalLength">The total length of the original data.</param>
-        public SliceSolver(int totalLength)
+        public SliceSolver(int sliceSize, int totalLength)
         {
+            _sliceSize = sliceSize;
             _totalLength = totalLength;
-            _gaussianElimination = new GaussianElimination(
-                coefficients: _coefficientsList,
-                solutions: _solutionsList);
         }
         
         /// <summary>
@@ -59,11 +61,26 @@
         {
             using (await _guard.LockAsync())
             {
-                _coefficientsList.Add(slice.Coefficients.ToArray());
-                _solutionsList.Add(slice.Data.ToArray());
+                _coefficientsList.Add(new BitArray(slice.Coefficients.ToArray()));
+                _solutionsList.Add(slice.Data.Pack().ToArray());
             }
         }
-        
+
+        /// <summary>
+        /// Swaps the two rows of the given <paramref name="solutions"/>.
+        /// </summary>
+        private static void Swap(
+            int from,
+            int to,
+            IList<long[]> solutions)
+        {
+            if (from >= solutions.Count || to >= solutions.Count)
+                return;
+            var temp = solutions[to];
+            solutions[to] = solutions[from];
+            solutions[from] = temp;
+        }
+
         /// <summary>
         /// Tries to decode the original data from all <see cref="Slice"/>s previously given to
         /// <see cref="RememberAsync"/>.
@@ -77,13 +94,51 @@
         {
             using (await _guard.LockAsync())
             {
+                var solved = false;
+                foreach (var step in GaussianEliminationHelpers.Solve(_coefficientsList))
+                {
+                    switch (step.Operation)
+                    {
+                        case Operation.Complete:
+                            solved = true;
+                            break;
+                        case Operation.Swap:
+                            Swap(step.From, step.To, _solutionsList);
+                            break;
+                        case Operation.Xor:
+                            Xor(step.From, step.To, _solutionsList);
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                }
+                if (!solved)
+                    return null;
                 return
-                    _gaussianElimination
-                        .Solve()?
-                        .SelectMany(x => x)
+                    _solutionsList
+                        .SelectMany(x => x.Unpack().Take(_sliceSize))
                         .Take(_totalLength)
                         .ToArray();
             }
+        }
+
+        /// <summary>
+        /// XORs the array at <paramref name="from"/> into the array at <paramref name="to"/>.
+        /// </summary>
+        private static void Xor(
+            int from,
+            int to,
+            IList<long[]> solutions)
+        {
+            if (from >= solutions.Count || to >= solutions.Count)
+                return;
+            var toArray = solutions[to];
+            var fromArray = solutions[from];
+            var length = Math.Min(
+                fromArray.Length,
+                toArray.Length);
+            for (var i = 0; i < length; ++i)
+                toArray[i] ^= fromArray[i];
         }
     }
 }

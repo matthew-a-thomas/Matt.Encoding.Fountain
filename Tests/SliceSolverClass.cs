@@ -21,7 +21,7 @@
                 slice2 = new Slice(
                     coefficients: new [] { true, true },
                     data: new [] { (byte)(value2 ^ value1) });
-            var solver = new SliceSolver(2);
+            var solver = new SliceSolver(1, 2);
             await solver.RememberAsync(slice1);
             await solver.RememberAsync(slice2);
             var solution = await solver.TrySolveAsync();
@@ -34,8 +34,8 @@
         [TestMethod]
         public async Task DoesNotSolvePrematurelyAsync()
         {
-            var solver = new SliceSolver(1);
-            var solution = await solver.TrySolveAsync(); // TODO: GaussianElimination is throwing an exception here
+            var solver = new SliceSolver(1, 1);
+            var solution = await solver.TrySolveAsync();
             Assert.IsNull(solution, "It created a solution from nothing");
         }
         
@@ -47,7 +47,7 @@
                 coefficients: new [] { true },
                 data: new [] { value }
             );
-            var solver = new SliceSolver(1);
+            var solver = new SliceSolver(1, 1);
             await solver.RememberAsync(slice);
             var solution = await solver.TrySolveAsync();
             Assert.IsNotNull(solution, "Didn't find a solution");
@@ -68,7 +68,7 @@
                 slice2 = new Slice(
                     coefficients: new [] { false, true },
                     data: new [] { value2 });
-            var solver = new SliceSolver(2);
+            var solver = new SliceSolver(1, 2);
             await solver.RememberAsync(slice1);
             await solver.RememberAsync(slice2);
             var solution = await solver.TrySolveAsync();
@@ -96,7 +96,7 @@
                     coefficients: new [] { true, true },
                     data: new [] { (byte)(originalData[0] ^ originalData[2]), originalData[1] }
                 );
-            var solver = new SliceSolver(3);
+            var solver = new SliceSolver(2, 3);
             await solver.RememberAsync(slice2);
             await solver.RememberAsync(slice1);
             var solution = await solver.TrySolveAsync();

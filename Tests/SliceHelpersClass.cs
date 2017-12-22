@@ -74,7 +74,7 @@
                     rngFactoryDelegate: () => new RandomAdapter(new Random(0)), // Seed Random so it's deterministic 
                     isSystematic: true
                 ).Skip(data.Length).Take(10).ToList();
-                var solver = new SliceSolver(data.Length);
+                var solver = new SliceSolver(2, data.Length);
                 foreach (var slice in mixedSection)
                     await solver.RememberAsync(slice);
                 var solution = await solver.TrySolveAsync();
